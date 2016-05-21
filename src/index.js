@@ -25,7 +25,9 @@ function spawn(cb)
 		cb(new gutil.PluginError("gulp-run-electron", err));
 		errored = true;
 	});
-
+	child.stdout.on("data", function(data) {
+		console.log(data.toString());
+	});
 	if (!errored) cb(null, file);
 }
 
