@@ -25,7 +25,13 @@ function spawn(cb)
 		cb(new gutil.PluginError("gulp-run-electron", err));
 		errored = true;
 	});
-
+	child.stdout.on("data", function(data) {
+		var s = data.toString().trim();
+		if(s) {
+			s = "[electron] " + s;
+			console.log(s);
+		}
+	});
 	if (!errored) cb(null, file);
 }
 
@@ -34,7 +40,7 @@ module.exports = function(_args, _opts)
 	args = _args || [];
 	opts = _opts || {};
 	// show colors in output
-	opts.stdio = opts.stdio || "inherit";
+	opts.stdio = opts.stdio || "pipe";
 	return through.obj(function(_file, enc, cb)
 	{
 		file = _file;
