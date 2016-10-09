@@ -29,7 +29,7 @@
     "through2": "^2.0.1"
   },
   "peerDependencies": {
-    "electron-prebuilt": "*"
+    "electron": "*"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
