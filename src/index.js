@@ -27,6 +27,15 @@ function spawn(cb)
 		return;
 	}
 
+	// Layer environment over existing environment (for linux)
+	if (opts.env) {
+		var env = process.env;
+		for (var key in opts.env) {
+			env[key] = opts.env[key];
+		}
+		opts.env = env;
+	}
+
 	child = proc.spawn(electron, args.concat(file.path), opts);
 
 	child.on("error", function(err)
